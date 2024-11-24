@@ -18,17 +18,7 @@ public class Entidad {
     private int dinero;
     private int exp;
     
-    public Entidad (String nombre, int lvl, double atk, double def, int hp, int dinero, int exp){
-        this.nombre = nombre;
-        this.lvl = lvl;
-        this.atk = atk;
-        this.def = def;
-        this.hp = hp;
-        this.dinero = dinero;
-        this.exp = exp;
-    }
-    
-    public Entidad (String nombre, int lvl, double atk, double def, int hp, int exp) {
+    public Entidad (String nombre, int lvl, int hp, double atk, double def, int dinero, int exp){
         this.nombre = nombre;
         this.lvl = lvl;
         this.atk = atk;
@@ -92,5 +82,18 @@ public class Entidad {
     
     public void Setdef(double def) {
         this.def = def;
+    }
+    
+    @Override
+    public String toString() {
+        return "Estadisticas del Jugador: {" +
+                "nombre='" + nombre + '\'' +
+                ", Nivel='" + lvl + '\'' +
+                ", EXP='" + exp + '\'' +
+                ", HP='" + hp + '\'' +
+                ", Atk='" + atk + '\'' +
+                ", def='" + def + '\'' +
+                ", dinero='" + dinero + '\'' +
+                '}';
     }
 }
