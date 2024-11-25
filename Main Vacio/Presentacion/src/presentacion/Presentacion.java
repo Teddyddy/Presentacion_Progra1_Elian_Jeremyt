@@ -10,7 +10,17 @@ import java.util.Scanner;
  * @author Elian y Jeremyt
  */
 public class Presentacion {
-
+    //Estos arreglos fueron creadas para poder ordenar cada cosa por grupos y así poder acceder a ellos luego.
+    static tob[] espada= new tob[3];
+    static tob[] escudo= new tob[3];
+    static int espadatam=0;
+    static int escudotam=0;
+    static Random ran= new Random();
+    static Entidad[] enemigoFacil= new Entidad[2];
+    static Entidad[] enemigoMedio= new Entidad[2];
+    static Entidad[] enemigoDificil= new Entidad[2];
+    static int maxhp;
+    
     /**
      * @param args the command line arguments
      */
@@ -24,6 +34,26 @@ public class Presentacion {
         double def;
         int dinero;
         int exp;
+        
+        tob espadas= new tob(5,0,3, "Espada Débil",3);
+        espada[espadatam]=espadas;
+        espadatam++;
+        tob espadas1= new tob(20,0,6, "Espada Media",10);
+        espada[espadatam]=espadas1;
+        espadatam++;
+        tob espadas2= new tob(50,0,50, "Espada Fuerte",25);
+        espada[espadatam]=espadas2;
+        espadatam++;
+        
+        tob escudos=new tob(0,5,3, "Escudo Débil",10);
+        escudo[escudotam]=escudos;
+        escudotam++;
+        tob escudos1=new tob(0,20,9, "Escudo Medio",25);
+        escudo[escudotam]=escudos1;
+        escudotam++;
+        tob escudos2=new tob(0,50,90, "Escudo Fuerte",60);
+        escudo[escudotam]=escudos2;
+        escudotam++;
         //Enemigos faciles
         
         nombre = "Slime";
@@ -34,6 +64,7 @@ public class Presentacion {
         dinero = 50;
         exp = 25;
         Entidad slime = new Entidad(nombre, lvl, hp, atk, def, dinero, exp);
+        enemigoFacil[0]=slime;
         
         nombre = "Lobo";
         lvl = 2;
@@ -43,6 +74,7 @@ public class Presentacion {
         dinero = 80;
         exp = 35;
         Entidad lobo = new Entidad(nombre, lvl, hp ,atk, def, dinero, exp);
+        enemigoFacil[1]=lobo;
         
         //Enemigos intermedios
         
@@ -54,6 +86,7 @@ public class Presentacion {
         dinero = 160;
         exp = 45;
         Entidad gnoll = new Entidad(nombre, lvl, hp, atk, def, dinero, exp);
+        enemigoMedio[0]=gnoll;
         
         nombre = "Mercenario";
         lvl = 7;
@@ -63,6 +96,7 @@ public class Presentacion {
         dinero = 200;
         exp = 60;
         Entidad merc = new Entidad(nombre, lvl, hp, atk, def, dinero, exp);
+        enemigoMedio[1]=merc;
         
         //Enemigos dificiles
         
@@ -74,6 +108,7 @@ public class Presentacion {
         dinero = 350;
         exp = 85;
         Entidad ogro = new Entidad(nombre, lvl, hp, atk, def, dinero, exp);
+        enemigoDificil[0]=ogro;
         
         nombre = "Lich";
         lvl = 15;
@@ -83,6 +118,7 @@ public class Presentacion {
         dinero = 500;
         exp = 100;
         Entidad lich = new Entidad(nombre, lvl, hp, atk, def, dinero, exp);
+        enemigoDificil[1]=lich;
         
         //Jefe final
         
@@ -100,7 +136,7 @@ public class Presentacion {
         // Usuario define su personaje
         System.out.println("Bienvenido(a)! has sido seleccionado por el rey para cazar al terrorifico dragon");
         System.out.println("que ha atormentado al reino por años, hoy es el dia en el que empiezas to gran odisea!");
-        System.out.print("Porfavor, Ingresa to nombre: ");
+        System.out.print("Ingresa to nombre: ");
         nombre = scan.next();
         lvl = 1;
         hp = 30;
@@ -110,7 +146,7 @@ public class Presentacion {
         exp = 0;
         Entidad jugador = new Entidad (nombre, lvl, hp, atk, def, dinero, exp);
         //valor de hp actuales
-        int maxhp = hp;
+        maxhp = hp;
         boolean juego = true;
         do {
             maxhp = maxhp;
@@ -186,23 +222,10 @@ public class Presentacion {
                     System.out.println("2) Enemigo intermedio");
                     System.out.println("3) Enemigo dificil");
                     boolean elegirpelea = true;
+                    int rand= ran.nextInt(0,2);
                     do {
                         int eleccion = scan.nextInt();
-                        if (eleccion == 1) {
-                            
-                            elegirpelea = false;
-                        }
-                        else if (eleccion == 2) {
-                            
-                            elegirpelea = false;
-                        }
-                        else if (eleccion == 3) {
-                            
-                            elegirpelea = false;
-                        }
-                        else {
-                            System.out.println("Error! Escoja otra vez.");
-                        }
+                        elegirpelea=tob.batalla(eleccion, elegirpelea, rand, enemigoFacil, enemigoMedio, enemigoDificil, jugador, maxhp);
                     }while (elegirpelea == true);
                     break;
                     
@@ -215,7 +238,38 @@ public class Presentacion {
                     break;
                     
                 case 4:
-                    System.out.println("Vendedor: Bienvenido(a) quieres hechar un vistazo a mis productos?");
+                    System.out.println("Vendedor: Bienvenido(a) a mi tienda\nElige el nivel del producto: ");
+                    do{
+                        System.out.println("1)objetos debiles\n2)objetos medios\n3)objetos fuertes");
+                        int opc=scan.nextInt();
+                        int opc1;
+                        int precio;
+                        precio=0;
+                        switch(opc){
+                            case 1:
+                                System.out.println(espada[0].toString()+"\n"+escudo[0].toString());
+                                precio=50;
+                                break;
+                                
+                            case 2:
+                                System.out.println(espada[1].toString()+"\n"+escudo[1].toString());
+                                precio=100;
+                                break;
+                            case 3:
+                                System.out.println(espada[2].toString()+"\n"+escudo[2].toString());
+                                precio=250;
+                                break;
+                            default:
+                                System.out.println("Ingrese un valor permitido");
+                        }
+                        System.out.println("El precio del producto es: "+precio);
+                        System.out.println("Ingrese el objeto que desea comprar[1) opción 1, 2) opción 2]");
+                        opc1=scan.nextInt();
+                        tob.compra(opc, opc1, jugador, espada, escudo, precio);
+                        break;
+                    }
+                    while(true);
+                    
                     break;
                     
                 case 5:
@@ -223,7 +277,17 @@ public class Presentacion {
                     break;
                     
                 case 6:
-                    juego = false;
+                    Scanner lee= new Scanner(System.in);
+                    System.out.println("¿¡Estas seguro de pelear contra el Dragon!?[S, N]");
+                    String son=lee.next();
+                    
+                    if(son.equalsIgnoreCase("S")){
+                        juego=tob.pelea(dragon, jugador, maxhp);
+                    }
+                    else{
+                        System.out.println("Pense que estabas Loco");
+                        juego=true;
+                    }
                     break;
                     
                 default:
