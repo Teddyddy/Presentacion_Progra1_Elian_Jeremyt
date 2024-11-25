@@ -273,10 +273,6 @@ public class Presentacion {
                     break;
                     
                 case 5:
-                    System.out.println("Hola mundo");
-                    break;
-                    
-                case 6:
                     Scanner lee= new Scanner(System.in);
                     System.out.println("¿¡Estas seguro de pelear contra el Dragon!?[S, N]");
                     String son=lee.next();
@@ -290,6 +286,9 @@ public class Presentacion {
                     }
                     break;
                     
+                case 6:
+                    juego=false;
+                    break;
                 default:
                     System.out.println("Error! intente de nuevo.");
                     break;
