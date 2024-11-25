@@ -85,14 +85,8 @@ public class Entidad {
     
     @Override
     public String toString() {
-        return "Estadisticas del Jugador: {" +
-                "nombre='" + nombre + '\'' +
-                ", Nivel='" + lvl + '\'' +
-                ", EXP='" + exp + '\'' +
-                ", HP='" + hp + '\'' +
-                ", Atk='" + atk + '\'' +
-                ", def='" + def + '\'' +
-                ", dinero='" + dinero + '\'' +
-                '}';
+        return "Estadisticas del Jugador:\n" +
+                "nombre=" + nombre + "\nNivel=" + lvl + "\nEXP=" + exp +"\nHP=" + hp + "\nAtk=" + atk + "\ndef=" + def +
+                "\ndinero=" + dinero;
     }
 }
